@@ -1,0 +1,604 @@
+<title>Espacio KB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a1220;
+    --bg-soft: #0f1c30;
+    --panel: #122238;
+    --panel-2: #17294364;
+    --surface: #152742;
+    --surface-hi: #1c3355;
+    --ink: #edf1f7;
+    --ink-dim: #9fadc7;
+    --ink-faint: #6c7c9c;
+    --accent: #5b8def;
+    --accent-bright: #93c2ff;
+    --accent-deep: #2c4a86;
+    --line: rgba(147,194,255,0.14);
+    --line-soft: rgba(147,194,255,0.07);
+    --shadow: 0 24px 60px -24px rgba(0,0,0,0.55);
+    --maxw: 1180px;
+    --gutter: clamp(20px, 5vw, 64px);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-inline: var(--gutter);
+  }
+  h1,h2,h3{
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    line-height: 1.12;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+  p{ margin:0; }
+  a{ color: inherit; }
+  img{ max-width:100%; }
+  ::selection{ background: var(--accent-deep); color: var(--ink); }
+  @media (prefers-reduced-motion: no-preference){ body{ scroll-behavior: smooth; } }
+
+  .eyebrow{
+    font-family: "Manrope", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height: 1px;
+    background: var(--accent-bright);
+    display: inline-block;
+  }
+
+  .wrap{ max-width: var(--maxw); margin-inline: auto; }
+  section{ padding-block: clamp(64px, 10vw, 120px); position: relative; }
+
+  /* ---------- NAV ---------- */
+  #nav{
+    position: sticky; top: 0; z-index: 40;
+    padding-inline: var(--gutter);
+    margin-inline: calc(var(--gutter) * -1);
+    background: rgba(10,18,32,0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  #nav .wrap{
+    display:flex; align-items:center; justify-content: space-between;
+    padding-block: 14px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand svg{ width:38px; height:38px; flex-shrink:0; }
+  .brand span{
+    font-family:"Fraunces", serif; font-style: italic; font-weight:500;
+    font-size:1.15rem; letter-spacing:0.01em; color: var(--ink);
+  }
+  .navlinks{ display:flex; align-items:center; gap: 34px; }
+  .navlinks a{
+    text-decoration:none; color: var(--ink-dim); font-size:0.92rem; font-weight:600;
+    transition: color .2s ease;
+  }
+  .navlinks a:hover{ color: var(--accent-bright); }
+  .navlinks a:focus-visible, .btn:focus-visible, .menu-btn:focus-visible{
+    outline: 2px solid var(--accent-bright); outline-offset: 3px; border-radius: 4px;
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background: var(--accent);
+    color: #071026;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration:none;
+    border: 1px solid transparent;
+    box-shadow: 0 10px 26px -10px rgba(91,141,239,0.55);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 32px -10px rgba(91,141,239,0.7); }
+  .btn.ghost{
+    background: transparent; color: var(--ink); border-color: var(--line);
+    box-shadow:none;
+  }
+  .btn.ghost:hover{ border-color: var(--accent-bright); color: var(--accent-bright); }
+  .btn.big{ padding: 16px 30px; font-size: 1rem; }
+  .btn svg{ width:18px; height:18px; }
+
+  .menu-btn{
+    display:none; background:none; border:1px solid var(--line); border-radius:10px;
+    width:42px; height:42px; color: var(--ink); cursor:pointer;
+    align-items:center; justify-content:center;
+  }
+  #mobile-menu{
+    display:none; flex-direction:column; gap: 4px; padding-block: 10px 18px;
+  }
+  #mobile-menu a:not(.btn){
+    text-decoration:none; color: var(--ink); font-weight:600; padding: 12px 4px;
+    border-bottom: 1px solid var(--line-soft); font-size: 1rem;
+  }
+  #mobile-menu.open{ display:flex; }
+  #mobile-menu .btn{ justify-content:center; margin-top:10px; width:100%; }
+  @media (max-width: 640px){
+    #nav-cta{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  #hero{ padding-block: clamp(56px, 9vw, 96px) clamp(70px, 10vw, 110px); overflow: clip; }
+  #hero .wrap{ position: relative; }
+  .hero-glow{
+    position:absolute; inset: -20% -10% auto -10%; height: 640px;
+    background: radial-gradient(closest-side, rgba(91,141,239,0.22), transparent 70%);
+    filter: blur(10px);
+    pointer-events:none; z-index:0;
+  }
+  .hero-geo{
+    position:absolute; right: -60px; top: -40px; width: 480px; height: 480px;
+    opacity: 0.5; pointer-events:none; z-index:0;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero-geo{ animation: spin 140s linear infinite; }
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px,5vw,64px);
+    align-items:center;
+  }
+  .hero-mark{ width: 168px; height:168px; margin-bottom: 28px; }
+  #hero h1{ font-size: clamp(2.3rem, 4.6vw, 3.6rem); max-width: 14ch; }
+  #hero h1 em{ font-style: italic; color: var(--accent-bright); }
+  .hero-sub{
+    margin-top: 22px; color: var(--ink-dim); font-size: 1.08rem; max-width: 46ch;
+  }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:16px; margin-top: 34px; align-items:center; }
+  .hero-note{ font-size:0.85rem; color: var(--ink-faint); margin-top:16px; }
+
+  .hero-badge{
+    position: relative; z-index:1;
+    aspect-ratio: 1/1.05;
+    border-radius: 28px;
+    background: linear-gradient(160deg, var(--panel), var(--bg-soft));
+    border: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: var(--shadow);
+  }
+  .hero-badge svg{ width: 72%; height:72%; }
+
+  /* ---------- SERVICES ---------- */
+  #services .head{ max-width: 52ch; }
+  #services h2{ font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin-top: 14px; }
+  .svc-grid{
+    margin-top: 48px;
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .svc-card{
+    background: var(--panel);
+    padding: 30px 26px;
+    display:flex; flex-direction:column; gap:16px;
+    transition: background .2s ease;
+  }
+  .svc-card:hover{ background: var(--surface-hi); }
+  .svc-card .ico{ width:40px; height:40px; color: var(--accent-bright); }
+  .svc-card h3{ font-size: 1.08rem; font-weight:600; }
+  .svc-card p{ color: var(--ink-dim); font-size: 0.94rem; }
+
+  /* ---------- FOUNDER ---------- */
+  #founder{
+    background: linear-gradient(180deg, var(--bg-soft), var(--bg) 70%);
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .founder-grid{
+    display:grid; grid-template-columns: 0.62fr 1fr; gap: clamp(36px,6vw,72px); align-items:center;
+  }
+  .medallion{ position:relative; width: min(100%, 340px); margin-inline: auto; padding: 0 24px 28px 0; }
+  .medallion-geo{ position:absolute; top:-32px; right:-8px; width:150px; height:150px; opacity:0.55; z-index:0; }
+  .medallion-photo{
+    position:relative; z-index:1; width:100%; aspect-ratio: 4/5; object-fit:cover; object-position:50% 18%;
+    border-radius:26px; border:1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); display:block;
+  }
+  .medallion-inset{
+    position:absolute; z-index:2; left:0; bottom:0; width:46%; aspect-ratio:4/5; object-fit:cover; object-position:50% 15%;
+    border-radius:18px; border:5px solid var(--bg); box-shadow: var(--shadow);
+  }
+  .credly{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;
+  }
+  .credly span{
+    font-size:0.8rem; font-weight:700; letter-spacing:0.02em;
+    border:1px solid var(--line); color: var(--ink-dim);
+    padding: 7px 13px; border-radius:999px;
+  }
+  #founder h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
+  #founder .role{ color: var(--accent-bright); font-weight:700; font-size:0.95rem; margin-top:6px; display:block; }
+  #founder .bio{ margin-top: 20px; color: var(--ink-dim); max-width: 56ch; font-size:1.03rem; }
+
+  /* ---------- TEAM ---------- */
+  #team h2{ font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin-top:14px; }
+  .team-grid{
+    margin-top: 44px;
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 26px;
+  }
+  .team-card{
+    border:1px solid var(--line); border-radius:20px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .team-card .photo{ width:100%; aspect-ratio: 4/5; object-fit:cover; object-position:50% 15%; display:block; background: var(--surface-hi); }
+  .team-card .info{ padding: 22px 22px 26px; }
+  .team-card h3{ font-size:1.1rem; font-weight:700; margin-top:6px; }
+  .team-card .role{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--accent-bright); font-weight:700; }
+  .team-card .bio-line{ margin-top:10px; color: var(--ink-dim); font-size:0.92rem; }
+
+  /* ---------- VALUES ---------- */
+  .values-grid{
+    margin-top: 44px;
+    display:grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+    background: var(--line); border:1px solid var(--line); border-radius:20px; overflow:hidden;
+  }
+  .value-card{ background: var(--panel); padding: 32px 28px; }
+  .value-card svg{ width:34px;height:34px;color:var(--accent-bright); margin-bottom:16px; }
+  .value-card h3{ font-size:1.05rem; font-weight:600; }
+  .value-card p{ margin-top:10px; color:var(--ink-dim); font-size:0.94rem; }
+
+  /* ---------- CONTACT ---------- */
+  #contact{
+    text-align:center;
+  }
+  #contact .card{
+    position:relative; overflow:clip;
+    border:1px solid var(--line); border-radius: 28px;
+    padding: clamp(48px,7vw,80px) clamp(24px,6vw,60px);
+    background: radial-gradient(circle at 50% 0%, rgba(91,141,239,0.16), var(--panel) 60%);
+  }
+  #contact h2{ font-size: clamp(1.9rem,3.6vw,2.7rem); max-width: 20ch; margin-inline:auto; }
+  #contact p.sub{ margin-top:16px; color: var(--ink-dim); max-width: 48ch; margin-inline:auto; font-size:1.05rem; }
+  #contact .hero-cta{ justify-content:center; margin-top:32px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding-block: 40px; border-top:1px solid var(--line-soft);
+    display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  }
+  footer .brand span{ font-size:1rem; }
+  footer .fine{ color: var(--ink-faint); font-size:0.84rem; }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in{ opacity:1; transform:none; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 880px){
+    .navlinks{ display:none; }
+    .menu-btn{ display:flex; }
+    .hero-grid, .founder-grid{ grid-template-columns: 1fr; }
+    .hero-badge{ max-width: 320px; margin-inline:auto; }
+    .svc-grid{ grid-template-columns: repeat(2,1fr); }
+    .values-grid{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px){
+    .hero-badge{ display:none; }
+  }
+  @media (max-width: 480px){
+    .svc-grid{ grid-template-columns: 1fr; }
+    .hero-cta{ flex-direction:column; align-items:stretch; }
+    .hero-cta .btn{ width:100%; justify-content:center; text-align:center; }
+  }
+</style>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Espacio KB, inicio">
+      <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+        <g opacity="0.9">
+          <path d="M60 30 L66 55 L91 60 L66 65 L60 90 L54 65 L29 60 L54 55 Z" fill="var(--accent-bright)"/>
+        </g>
+        <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="600" font-size="30" fill="var(--ink)">KB</text>
+      </svg>
+      <span>Espacio KB</span>
+    </a>
+    <div class="navlinks">
+      <a href="#services">Servicios</a>
+      <a href="#founder">Fundadora</a>
+      <a href="#team">Equipo</a>
+      <a href="#contact">Contacto</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a class="btn" id="nav-cta" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
+        Reservar turno
+      </a>
+      <button class="menu-btn" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div id="mobile-menu">
+      <a href="#services">Servicios</a>
+      <a href="#founder">Fundadora</a>
+      <a href="#team">Equipo</a>
+      <a href="#contact">Contacto</a>
+      <a class="btn" id="mobile-cta-wa" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
+        Reservar turno por WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap">
+      <svg class="hero-geo" viewBox="0 0 480 480" aria-hidden="true">
+        <g fill="none" stroke="var(--accent-bright)" stroke-width="0.7" opacity="0.55">
+          <circle cx="240" cy="240" r="60"/><circle cx="240" cy="150" r="60"/><circle cx="240" cy="330" r="60"/>
+          <circle cx="162" cy="195" r="60"/><circle cx="162" cy="285" r="60"/>
+          <circle cx="318" cy="195" r="60"/><circle cx="318" cy="285" r="60"/>
+        </g>
+      </svg>
+      <div class="hero-grid">
+        <div class="reveal">
+          <svg class="hero-mark" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="55" fill="none" stroke="var(--line)" stroke-width="1"/>
+            <circle cx="60" cy="60" r="46" fill="none" stroke="var(--accent)" stroke-width="1.3"/>
+            <path d="M60 20 L68 52 L100 60 L68 68 L60 100 L52 68 L20 60 L52 52 Z" fill="var(--accent-bright)" opacity="0.9"/>
+            <text x="60" y="70" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="600" font-size="32" fill="var(--ink)">KB</text>
+          </svg>
+          <span class="eyebrow">Consultorio &amp; espacio multidisciplinario</span>
+          <h1 style="margin-top:16px;">Cuatro caminos, <em>un mismo cuidado.</em></h1>
+          <p class="hero-sub">KB es el espacio de Karina Beatriz Ozper, donde la podología, la reflexología, los masajes y el tejido se encuentran para acompañarte con conocimiento, calidez y calidad humana.</p>
+          <div class="hero-cta">
+            <a class="btn big" id="hero-cta-wa" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
+              Reservar turno por WhatsApp
+            </a>
+            <a class="btn ghost" href="#services">Conocer los servicios</a>
+          </div>
+          <p class="hero-note">Respondemos por WhatsApp de lunes a sábado.</p>
+        </div>
+        <div class="hero-badge reveal">
+          <svg viewBox="0 0 300 300" aria-hidden="true">
+            <circle cx="150" cy="150" r="120" fill="none" stroke="var(--line)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="96" fill="none" stroke="var(--accent)" stroke-width="1.2"/>
+            <g fill="none" stroke="var(--accent-bright)" stroke-width="0.8" opacity="0.7">
+              <circle cx="150" cy="150" r="42"/><circle cx="150" cy="108" r="42"/><circle cx="150" cy="192" r="42"/>
+              <circle cx="113" cy="129" r="42"/><circle cx="113" cy="171" r="42"/>
+              <circle cx="187" cy="129" r="42"/><circle cx="187" cy="171" r="42"/>
+            </g>
+            <path d="M150 60 L160 140 L240 150 L160 160 L150 240 L140 160 L60 150 L140 140 Z" fill="var(--accent-bright)" opacity="0.85"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Servicios</span>
+        <h2>Elegí tu punto de partida</h2>
+      </div>
+      <div class="svc-grid reveal">
+        <article class="svc-card">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c6 0 9 5 9 12 0 5-2 7-2 12 0 6-4 10-10 10-5 0-9-3-9-9 0-6 3-8 3-14C9 10 13 6 18 6Z"/><path d="M27 20c3-1 7 0 8 5 1 4-1 7-5 9-3 1.5-6 1-8-1"/></svg>
+          <h3>Podología</h3>
+          <p>Cuidado técnico y preventivo de tus pies, con formación UBA y atención personalizada en cada sesión.</p>
+        </article>
+        <article class="svc-card">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42c0-14-2-18-14-24 12-6 14 4 14 10 0-6 2-16 14-10-12 6-14 10-14 24Z"/></svg>
+          <h3>Reflexología</h3>
+          <p>Terapia que trabaja puntos reflejos del pie para aliviar tensiones y restaurar el equilibrio del cuerpo.</p>
+        </article>
+        <article class="svc-card">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 24c0-3 2-5 5-5s5 2 5 5v6"/><path d="M20 22c0-3 2-5 5-5s5 2 5 5v10"/><path d="M30 24c0-3 2-5 5-5s5 2 5 5v8c0 6-4 11-11 11h-4c-6 0-9-3-11-7l-4-7c-1-2 0-4 2-5 1.5-.7 3 0 4 1.5l2 3"/></svg>
+          <h3>Masajes</h3>
+          <p>Sesiones para liberar tensión muscular y recuperar la calma, adaptadas a lo que tu cuerpo necesita.</p>
+        </article>
+        <article class="svc-card">
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="10"/><path d="M19 9c-4 4-4 12 0 20M9 19c4-4 12-4 20 0"/><path d="M27 27c4 3 8 9 6 13-3-1-9-3-12-8"/></svg>
+          <h3>Clases de tejido</h3>
+          <p>Un espacio de encuentro para aprender, crear con las manos y desconectar en compañía.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="wrap founder-grid">
+      <div class="medallion reveal">
+        <svg class="medallion-geo" viewBox="0 0 150 150" aria-hidden="true">
+          <g fill="none" stroke="var(--accent-bright)" stroke-width="0.8" opacity="0.7">
+            <circle cx="75" cy="75" r="26"/><circle cx="75" cy="49" r="26"/><circle cx="75" cy="101" r="26"/>
+            <circle cx="53" cy="62" r="26"/><circle cx="53" cy="88" r="26"/>
+            <circle cx="97" cy="62" r="26"/><circle cx="97" cy="88" r="26"/>
+          </g>
+        </svg>
+        <img class="medallion-photo" src="images/karina.jpg" alt="Karina Beatriz Ozper, fundadora de Espacio KB">
+        <img class="medallion-inset" src="images/karina-trabajando.jpg" alt="Karina atendiendo a una paciente en el consultorio">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Al frente del proyecto</span>
+        <h2 style="margin-top:14px;">Karina Beatriz Ozper</h2>
+        <span class="role">Fundadora de Espacio KB</span>
+        <div class="credly">
+          <span>Técnica Podóloga · UBA</span>
+          <span>Docente universitaria</span>
+          <span>Reflexóloga · Universidad del Salvador</span>
+        </div>
+        <p class="bio">KB nace con el propósito de brindar un lugar de atención y bienestar, integrando diferentes disciplinas en un mismo espacio. Karina reúne formación, experiencia y una profunda vocación por el cuidado y el bienestar de las personas — y le pone su sello a cada rincón de este proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Equipo KB</span>
+        <h2>Las manos detrás de cada disciplina</h2>
+      </div>
+      <div class="team-grid reveal">
+        <div class="team-card">
+          <img class="photo" src="images/karina.jpg" alt="Karina Beatriz Ozper">
+          <div class="info">
+            <span class="role">Podología · Reflexología</span>
+            <h3>Karina Beatriz Ozper</h3>
+            <p class="bio-line">Fundadora de Espacio KB. Técnica Podóloga (UBA) y Reflexóloga (Universidad del Salvador).</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img class="photo" src="images/osmar-masajista.jpg" alt="Osmar Ocampo">
+          <div class="info">
+            <span class="role">Masajes</span>
+            <h3>Osmar Ocampo</h3>
+            <p class="bio-line">Sesiones de masajes para liberar tensión muscular y recuperar la calma.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img class="photo" src="images/alejandra-ocampo-masajista.jpg" alt="Alejandra Ocampo">
+          <div class="info">
+            <span class="role">Masajes</span>
+            <h3>Alejandra Ocampo</h3>
+            <p class="bio-line">Sesiones de masajes adaptadas a lo que tu cuerpo necesita en cada visita.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img class="photo" src="images/alicia-presbisteris-reflexologa.jpg" alt="Alicia Presbisteris">
+          <div class="info">
+            <span class="role">Reflexología</span>
+            <h3>Alicia Presbisteris</h3>
+            <p class="bio-line">Trabaja los puntos reflejos del pie para restaurar el equilibrio del cuerpo.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img class="photo" src="images/marta-zulli-reflexologa.jpg" alt="Marta Zulli">
+          <div class="info">
+            <span class="role">Reflexología</span>
+            <h3>Marta Zulli</h3>
+            <p class="bio-line">Acompaña cada sesión con calidez y atención personalizada.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img class="photo" src="images/beatriz-gimenez-tejido.jpg" alt="Beatriz Giménez">
+          <div class="info">
+            <span class="role">Clases de tejido</span>
+            <h3>Beatriz Giménez</h3>
+            <p class="bio-line">Guía las clases de tejido: un espacio para aprender, crear y desconectar en compañía.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="values" style="padding-top:0;">
+    <div class="wrap">
+      <div class="values-grid reveal">
+        <div class="value-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 41C10 30 6 22 6 15c0-6 5-9 9-9 4 0 7 2 9 6 2-4 5-6 9-6 4 0 9 3 9 9 0 7-4 15-18 26Z"/></svg>
+          <h3>Pasión</h3>
+          <p>Por lo que hacemos, en cada una de las disciplinas del espacio.</p>
+        </div>
+        <div class="value-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l7 5"/></svg>
+          <h3>Compromiso</h3>
+          <p>Con tu proceso, tus tiempos y los resultados que buscamos juntos.</p>
+        </div>
+        <div class="value-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 6c8 0 8 7 14 7 0 12-6 22-14 29-8-7-14-17-14-29 6 0 6-7 14-7Z"/></svg>
+          <h3>Calidad humana</h3>
+          <p>La forma en que te acompañamos, tan importante como la técnica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="card reveal">
+        <span class="eyebrow" style="justify-content:center;">Reservá tu turno</span>
+        <h2 style="margin-top:16px;">Escribinos y coordinamos el día y horario a tu medida.</h2>
+        <p class="sub">Contanos qué necesitás — podología, reflexología, masajes o tejido — y te respondemos por WhatsApp.</p>
+        <div class="hero-cta">
+          <a class="btn big" id="contact-cta-wa" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
+            Reservar turno por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 120 120" aria-hidden="true" style="width:30px;height:30px;">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+        <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="600" font-size="30" fill="var(--ink)">KB</text>
+      </svg>
+      <span>Espacio KB</span>
+    </a>
+    <p class="fine">© <span id="year"></span> Espacio KB — Karina Beatriz Ozper. Podología · Reflexología · Masajes · Tejido.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var phone = "5491162543934";
+    var msg = encodeURIComponent("¡Hola! Quiero reservar un turno en Espacio KB 🦶");
+    var link = "https://wa.me/" + phone + "?text=" + msg;
+    ["nav-cta","hero-cta-wa","contact-cta-wa","mobile-cta-wa"].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.href = link;
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var toggle = document.getElementById("menu-toggle");
+    var menu = document.getElementById("mobile-menu");
+    toggle.addEventListener("click", function(){
+      var open = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    menu.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){ menu.classList.remove("open"); toggle.setAttribute("aria-expanded","false"); });
+    });
+
+    if(window.matchMedia("(prefers-reduced-motion: no-preference)").matches && "IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+    }
+  })();
+</script>
