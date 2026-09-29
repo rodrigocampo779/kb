@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Espacio KB</title>
+<title>Consultorio KB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -163,7 +163,7 @@
 
   .hero-grid{
     position:relative; z-index:1;
-    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px,5vw,64px);
+    display:grid; grid-template-columns: 1fr; gap: clamp(32px,5vw,64px);
     align-items:center;
   }
   .hero-mark{ width: 168px; height:168px; margin-bottom: 28px; }
@@ -174,17 +174,6 @@
   }
   .hero-cta{ display:flex; flex-wrap:wrap; gap:16px; margin-top: 34px; align-items:center; }
   .hero-note{ font-size:0.85rem; color: var(--ink-faint); margin-top:16px; }
-
-  .hero-badge{
-    position: relative; z-index:1;
-    aspect-ratio: 1/1.05;
-    border-radius: 28px;
-    background: linear-gradient(160deg, var(--panel), var(--bg-soft));
-    border: 1px solid var(--line);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow: var(--shadow);
-  }
-  .hero-badge svg{ width: 72%; height:72%; }
 
   /* ---------- SERVICES ---------- */
   #services .head{ max-width: 52ch; }
@@ -207,6 +196,120 @@
   .svc-card .ico{ width:40px; height:40px; color: var(--accent-bright); }
   .svc-card h3{ font-size: 1.08rem; font-weight:600; }
   .svc-card p{ color: var(--ink-dim); font-size: 0.94rem; }
+  .svc-more{
+    display:inline-flex; align-items:center; gap:6px; margin-top:4px;
+    background:none; border:none; padding:0; cursor:pointer;
+    color: var(--accent-bright); font-weight:700; font-size:0.86rem; font-family:inherit;
+  }
+  .svc-more svg{ width:14px; height:14px; transition: transform .2s ease; }
+  .svc-more[aria-expanded="true"] svg{ transform: rotate(180deg); }
+
+  .svc-detail{
+    margin-top: 1px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(28px,4vw,44px);
+  }
+  .svc-detail-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px,4vw,48px); align-items:start;
+  }
+  .svc-detail h3{ font-size:1.3rem; }
+  .svc-detail p{ margin-top:14px; color: var(--ink-dim); font-size:0.98rem; }
+  .svc-detail ul{ margin:16px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .svc-detail ul li{ display:flex; align-items:baseline; gap:10px; color: var(--ink-dim); font-size:0.96rem; }
+  .svc-detail ul li::before{ content:"—"; color: var(--accent-bright); flex-shrink:0; }
+  .svc-gallery{ display:grid; grid-template-columns: repeat(3,1fr); gap:14px; }
+  .svc-gallery figure{ margin:0; background: var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 10px; text-align:center; }
+  .svc-gallery svg{ width:38px; height:38px; color: var(--accent-bright); }
+  .svc-gallery figcaption{ margin-top:10px; font-size:0.78rem; color: var(--ink-dim); }
+
+  .svc-faq{ margin-top: 36px; border-top: 1px solid var(--line); padding-top: 28px; }
+  .svc-faq h4{ font-family:"Fraunces",serif; font-weight:500; font-size:1.1rem; margin-bottom:6px; }
+  .svc-faq details{ border-bottom: 1px solid var(--line-soft); padding: 16px 0; }
+  .svc-faq summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-weight:600; font-size:0.98rem; color: var(--ink);
+  }
+  .svc-faq summary::-webkit-details-marker{ display:none; }
+  .svc-faq summary::after{
+    content:""; flex-shrink:0; width:10px; height:10px;
+    border-right:2px solid var(--accent-bright); border-bottom:2px solid var(--accent-bright);
+    transform: rotate(45deg); transition: transform .2s ease; margin-right:2px;
+  }
+  .svc-faq details[open] summary::after{ transform: rotate(-135deg); }
+  .svc-faq details p{ margin-top:12px; color: var(--ink-dim); font-size:0.94rem; }
+  @media (max-width: 720px){
+    .svc-detail-grid{ grid-template-columns: 1fr; }
+    .svc-gallery{ grid-template-columns: repeat(3,1fr); }
+  }
+
+  /* ---------- REFLEX MAP ---------- */
+  #map .intro{ max-width: 62ch; }
+  #map h2{ font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin-top: 14px; }
+  #map p.lede{ margin-top: 16px; color: var(--ink-dim); font-size: 1.05rem; }
+  .map-grid{
+    margin-top: 44px;
+    display:grid; grid-template-columns: 0.8fr 1fr; gap: clamp(32px, 5vw, 64px);
+    align-items:center;
+  }
+  .map3d-grid{
+    margin-top: 44px;
+    display:grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 48px); align-items:start;
+  }
+  .map3d-viewport{
+    position:relative; width:100%; height:400px; border-radius:24px; overflow:hidden;
+    border:1px solid var(--line); box-shadow: var(--shadow);
+    background: radial-gradient(circle at 50% 30%, rgba(91,141,239,0.14), var(--panel) 70%);
+  }
+  .map3d-viewport canvas{ display:block; width:100%!important; height:100%!important; touch-action:none; cursor:grab; }
+  .map3d-viewport.dragging canvas{ cursor:grabbing; }
+  .map3d-loading{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color: var(--ink-dim); font-size:0.9rem; text-align:center; padding:20px; gap:8px;
+  }
+  .map3d-loading[hidden]{ display:none; }
+  .map3d-hint{
+    position:absolute; left:16px; bottom:14px; font-size:0.74rem; color: var(--ink-faint);
+    background: rgba(10,18,32,0.55); padding:6px 10px; border-radius:999px; pointer-events:none;
+  }
+  .map3d-panel{ display:flex; flex-direction:column; gap:20px; }
+  .map3d-legend{
+    display:grid; grid-template-columns: repeat(2,1fr); gap: 6px 14px;
+    border:1px solid var(--line); border-radius:18px; padding: 16px 18px; background: var(--panel);
+  }
+  .map3d-legend-item{
+    display:flex; align-items:center; gap:8px; font-size:0.8rem; color: var(--ink-dim);
+    background:none; border:none; padding:5px 0; cursor:pointer; text-align:left; font-family:inherit;
+    transition: color .15s ease;
+  }
+  .map3d-legend-item:hover{ color: var(--ink); }
+  .map3d-legend-item.active{ color: var(--ink); font-weight:700; }
+  .map3d-swatch{ width:11px; height:11px; border-radius:50%; flex-shrink:0; box-shadow: 0 0 0 2px rgba(255,255,255,0.18); }
+  .map-info .related{ margin-top:10px; font-size:0.85rem; font-weight:700; color: var(--accent-bright); }
+  .map-info .tip{ margin-top:8px; }
+  .map3d-disclaimer{ margin-top:30px; font-size:0.8rem; color: var(--ink-faint); max-width:70ch; }
+  .map3d-credit{ margin-top:8px; font-size:0.74rem; color: var(--ink-faint); }
+  .map3d-credit a{ color: var(--accent-bright); text-decoration:underline; }
+  @media (max-width: 820px){
+    .map3d-grid{ grid-template-columns: 1fr; }
+    .map3d-viewport{ height:300px; }
+  }
+  .map-info{
+    border:1px solid var(--line); border-radius:22px; padding: clamp(24px,4vw,34px);
+    background: var(--panel); min-height: 190px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .map-info-eyebrow{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color: var(--accent-bright);
+  }
+  .map-info h3{ font-size:1.35rem; margin-top:10px; }
+  .map-info p{ margin-top:12px; color: var(--ink-dim); font-size:1.02rem; }
+  .map-hint{ margin-top:18px; font-size:0.85rem; color: var(--ink-faint); }
+  @media (max-width: 720px){
+    .map-grid{ grid-template-columns: 1fr; }
+  }
 
   /* ---------- FOUNDER ---------- */
   #founder{
@@ -281,6 +384,38 @@
   #contact p.sub{ margin-top:16px; color: var(--ink-dim); max-width: 48ch; margin-inline:auto; font-size:1.05rem; }
   #contact .hero-cta{ justify-content:center; margin-top:32px; }
 
+  .booking-form{
+    margin-top: 36px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    text-align:left;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+  .booking-form .field{ display:flex; flex-direction:column; gap:8px; }
+  .booking-form .field.full{ grid-column: 1 / -1; }
+  .booking-form label{ font-size:0.82rem; font-weight:700; color: var(--ink-dim); }
+  .booking-form input, .booking-form select{
+    color-scheme: dark;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 13px 14px;
+    font: inherit;
+    font-size: 0.96rem;
+  }
+  .booking-form input:focus, .booking-form select:focus{
+    outline: 2px solid var(--accent-bright); outline-offset: 2px; border-color: var(--accent-bright);
+  }
+  .booking-form .submit-row{ grid-column: 1 / -1; display:flex; justify-content:center; margin-top:8px; }
+  .booking-form .submit-row .btn{ border:none; cursor:pointer; }
+  .booking-note{ margin-top:16px; font-size:0.85rem; color: var(--ink-faint); }
+  @media (max-width: 620px){
+    .booking-form{ grid-template-columns: 1fr; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding-block: 40px; border-top:1px solid var(--line-soft);
@@ -300,13 +435,9 @@
   @media (max-width: 880px){
     .navlinks{ display:none; }
     .menu-btn{ display:flex; }
-    .hero-grid, .founder-grid{ grid-template-columns: 1fr; }
-    .hero-badge{ max-width: 320px; margin-inline:auto; }
+    .founder-grid{ grid-template-columns: 1fr; }
     .svc-grid{ grid-template-columns: repeat(2,1fr); }
     .values-grid{ grid-template-columns: 1fr; }
-  }
-  @media (max-width: 560px){
-    .hero-badge{ display:none; }
   }
   @media (max-width: 480px){
     .svc-grid{ grid-template-columns: 1fr; }
@@ -319,7 +450,7 @@
 
 <nav id="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Espacio KB, inicio">
+    <a class="brand" href="#top" aria-label="Consultorio KB, inicio">
       <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
         <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
         <g opacity="0.9">
@@ -327,10 +458,11 @@
         </g>
         <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="600" font-size="30" fill="var(--ink)">KB</text>
       </svg>
-      <span>Espacio KB</span>
+      <span>Consultorio KB</span>
     </a>
     <div class="navlinks">
       <a href="#services">Servicios</a>
+      <a href="#map">Mapa</a>
       <a href="#founder">Fundadora</a>
       <a href="#team">Equipo</a>
       <a href="#contact">Contacto</a>
@@ -348,6 +480,7 @@
   <div class="wrap">
     <div id="mobile-menu">
       <a href="#services">Servicios</a>
+      <a href="#map">Mapa</a>
       <a href="#founder">Fundadora</a>
       <a href="#team">Equipo</a>
       <a href="#contact">Contacto</a>
@@ -391,18 +524,6 @@
           </div>
           <p class="hero-note">Respondemos por WhatsApp de lunes a sábado.</p>
         </div>
-        <div class="hero-badge">
-          <svg viewBox="0 0 300 300" aria-hidden="true">
-            <circle cx="150" cy="150" r="120" fill="none" stroke="var(--line)" stroke-width="1"/>
-            <circle cx="150" cy="150" r="96" fill="none" stroke="var(--accent)" stroke-width="1.2"/>
-            <g fill="none" stroke="var(--accent-bright)" stroke-width="0.8" opacity="0.7">
-              <circle cx="150" cy="150" r="42"/><circle cx="150" cy="108" r="42"/><circle cx="150" cy="192" r="42"/>
-              <circle cx="113" cy="129" r="42"/><circle cx="113" cy="171" r="42"/>
-              <circle cx="187" cy="129" r="42"/><circle cx="187" cy="171" r="42"/>
-            </g>
-            <path d="M150 60 L160 140 L240 150 L160 160 L150 240 L140 160 L60 150 L140 140 Z" fill="var(--accent-bright)" opacity="0.85"/>
-          </svg>
-        </div>
       </div>
     </div>
   </section>
@@ -418,23 +539,269 @@
           <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c6 0 9 5 9 12 0 5-2 7-2 12 0 6-4 10-10 10-5 0-9-3-9-9 0-6 3-8 3-14C9 10 13 6 18 6Z"/><path d="M27 20c3-1 7 0 8 5 1 4-1 7-5 9-3 1.5-6 1-8-1"/></svg>
           <h3>Podología</h3>
           <p>Cuidado técnico y preventivo de tus pies, con formación UBA y atención personalizada en cada sesión.</p>
+          <button type="button" class="svc-more" id="podologia-toggle" aria-expanded="false" aria-controls="podologia-detail">
+            <span class="svc-more-label">Conocé más</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
         </article>
         <article class="svc-card">
           <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42c0-14-2-18-14-24 12-6 14 4 14 10 0-6 2-16 14-10-12 6-14 10-14 24Z"/></svg>
           <h3>Reflexología</h3>
           <p>Terapia que trabaja puntos reflejos del pie para aliviar tensiones y restaurar el equilibrio del cuerpo.</p>
+          <button type="button" class="svc-more" id="reflexologia-toggle" aria-expanded="false" aria-controls="reflexologia-detail">
+            <span class="svc-more-label">Conocé más</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
         </article>
         <article class="svc-card">
           <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 24c0-3 2-5 5-5s5 2 5 5v6"/><path d="M20 22c0-3 2-5 5-5s5 2 5 5v10"/><path d="M30 24c0-3 2-5 5-5s5 2 5 5v8c0 6-4 11-11 11h-4c-6 0-9-3-11-7l-4-7c-1-2 0-4 2-5 1.5-.7 3 0 4 1.5l2 3"/></svg>
           <h3>Masajes</h3>
           <p>Sesiones para liberar tensión muscular y recuperar la calma, adaptadas a lo que tu cuerpo necesita.</p>
+          <button type="button" class="svc-more" id="masajes-toggle" aria-expanded="false" aria-controls="masajes-detail">
+            <span class="svc-more-label">Conocé más</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
         </article>
         <article class="svc-card">
           <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="10"/><path d="M19 9c-4 4-4 12 0 20M9 19c4-4 12-4 20 0"/><path d="M27 27c4 3 8 9 6 13-3-1-9-3-12-8"/></svg>
           <h3>Clases de tejido</h3>
           <p>Un espacio de encuentro para aprender, crear con las manos y desconectar en compañía.</p>
+          <button type="button" class="svc-more" id="tejido-toggle" aria-expanded="false" aria-controls="tejido-detail">
+            <span class="svc-more-label">Conocé más</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
         </article>
       </div>
+
+      <div class="svc-detail reveal" id="podologia-detail" hidden>
+        <div class="svc-detail-grid">
+          <div>
+            <span class="eyebrow">Podología</span>
+            <h3 style="margin-top:12px;">Cuidado técnico y preventivo para tus pies</h3>
+            <p>Cada sesión combina formación técnica con atención personalizada, pensando en la salud y la comodidad de tus pies a largo plazo.</p>
+            <ul>
+              <li>Corte y cuidado integral de uñas</li>
+              <li>Tratamiento de callosidades y durezas</li>
+              <li>Atención de uñas encarnadas</li>
+              <li>Cuidado especializado de pie diabético</li>
+              <li>Tratamiento de hongos y micosis</li>
+            </ul>
+          </div>
+          <div class="svc-gallery">
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c6 0 9 5 9 12 0 5-2 7-2 12 0 6-4 10-10 10-5 0-9-3-9-9 0-6 3-8 3-14C9 10 13 6 18 6Z"/><circle cx="16" cy="18" r="1.6" fill="currentColor" stroke="none"/><circle cx="21" cy="16" r="1.6" fill="currentColor" stroke="none"/><circle cx="14" cy="24" r="1.6" fill="currentColor" stroke="none"/></svg>
+              <figcaption>Cuidado de uñas</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="12"/><path d="M29 29 L40 40"/></svg>
+              <figcaption>Control y prevención</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h6a4 4 0 0 1 4 4v8h-4v-8h-6z"/><path d="M16 20v14a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-4"/></svg>
+              <figcaption>Instrumental técnico</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="svc-faq">
+          <h4>Preguntas frecuentes</h4>
+          <details>
+            <summary>¿Qué incluye una consulta podológica?</summary>
+            <p>Evaluación del estado de tus pies, corte y cuidado de uñas, remoción de callosidades y durezas, y recomendaciones para el cuidado diario.</p>
+          </details>
+          <details>
+            <summary>¿Cada cuánto conviene hacer un control podológico?</summary>
+            <p>En general se recomienda cada 4 a 6 semanas, aunque puede variar según cada caso y el tratamiento indicado.</p>
+          </details>
+          <details>
+            <summary>¿Atienden a personas con pie diabético?</summary>
+            <p>Sí, ofrecemos atención especializada para el cuidado del pie diabético, con las técnicas y precauciones adecuadas.</p>
+          </details>
+          <details>
+            <summary>¿Se puede venir sin turno?</summary>
+            <p>Preferimos coordinar el turno por WhatsApp para asegurarte un horario, pero podés consultar disponibilidad para el mismo día.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="svc-detail reveal" id="reflexologia-detail" hidden>
+        <div class="svc-detail-grid">
+          <div>
+            <span class="eyebrow">Reflexología</span>
+            <h3 style="margin-top:12px;">Puntos reflejos, bienestar integral</h3>
+            <p>La reflexología estimula puntos reflejos ubicados en los pies, vinculados a distintos órganos y sistemas del cuerpo, buscando equilibrio general.</p>
+            <ul>
+              <li>Alivio de tensión y estrés acumulado</li>
+              <li>Mejora la circulación sanguínea</li>
+              <li>Favorece la relajación profunda</li>
+              <li>Técnica complementaria y no invasiva</li>
+              <li>Sesiones adaptadas a cada persona</li>
+            </ul>
+          </div>
+          <div class="svc-gallery">
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42c0-14-2-18-14-24 12-6 14 4 14 10 0-6 2-16 14-10-12 6-14 10-14 24Z"/><circle cx="20" cy="16" r="1.6" fill="currentColor" stroke="none"/><circle cx="26" cy="20" r="1.6" fill="currentColor" stroke="none"/><circle cx="22" cy="26" r="1.6" fill="currentColor" stroke="none"/></svg>
+              <figcaption>Puntos reflejos</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26h7l4-10 6 18 4-14 3 6h12"/></svg>
+              <figcaption>Circulación</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c8 6 12 12 12 19a12 12 0 0 1-24 0c0-7 4-13 12-19Z"/></svg>
+              <figcaption>Relajación</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="svc-faq">
+          <h4>Preguntas frecuentes</h4>
+          <details>
+            <summary>¿Qué es la reflexología?</summary>
+            <p>Es una terapia que estimula puntos reflejos del pie vinculados a distintos órganos, buscando equilibrio y bienestar general.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto dura una sesión?</summary>
+            <p>Generalmente entre 45 y 60 minutos, dependiendo de lo que necesites trabajar.</p>
+          </details>
+          <details>
+            <summary>¿Es dolorosa?</summary>
+            <p>No, es una técnica suave. Puede haber algo de sensibilidad en ciertos puntos, pero no debería doler.</p>
+          </details>
+          <details>
+            <summary>¿Cada cuánto conviene hacerla?</summary>
+            <p>Depende de cada persona, pero muchas eligen una sesión mensual para sostener sus beneficios.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="svc-detail reveal" id="masajes-detail" hidden>
+        <div class="svc-detail-grid">
+          <div>
+            <span class="eyebrow">Masajes</span>
+            <h3 style="margin-top:12px;">Técnicas manuales para cada necesidad</h3>
+            <p>Trabajamos distintas técnicas según lo que tu cuerpo necesite: descontracturar, activar la circulación o simplemente relajarte.</p>
+            <ul>
+              <li>Masaje descontracturante y deportivo</li>
+              <li>Drenaje linfático</li>
+              <li>Masaje relajante</li>
+              <li>Adaptado a la zona y nivel de tensión de cada persona</li>
+            </ul>
+          </div>
+          <div class="svc-gallery">
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 24c0-3 2-5 5-5s5 2 5 5v6"/><path d="M20 22c0-3 2-5 5-5s5 2 5 5v10"/><path d="M30 24c0-3 2-5 5-5s5 2 5 5v8c0 6-4 11-11 11h-4c-6 0-9-3-11-7l-4-7c-1-2 0-4 2-5 1.5-.7 3 0 4 1.5l2 3"/></svg>
+              <figcaption>Descontracturante</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20c4-8 12-8 16 0s12 8 16 0"/><path d="M8 30c4-8 12-8 16 0s12 8 16 0"/></svg>
+              <figcaption>Drenaje linfático</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c8 6 12 12 12 19a12 12 0 0 1-24 0c0-7 4-13 12-19Z"/></svg>
+              <figcaption>Relajante</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="svc-faq">
+          <h4>Preguntas frecuentes</h4>
+          <details>
+            <summary>¿Qué tipo de masaje me conviene?</summary>
+            <p>Si tenés contracturas puntuales, el descontracturante; para relajarte en general, el relajante; y el drenaje linfático ayuda a eliminar líquidos retenidos.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto dura una sesión?</summary>
+            <p>Entre 30 y 60 minutos, según el tipo de masaje elegido.</p>
+          </details>
+          <details>
+            <summary>¿Tengo que traer algo?</summary>
+            <p>No, nosotros nos encargamos de todo lo necesario para la sesión.</p>
+          </details>
+          <details>
+            <summary>¿Hay contraindicaciones?</summary>
+            <p>Contanos tu historial de salud antes de la sesión para adaptar la técnica a tu caso.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="svc-detail reveal" id="tejido-detail" hidden>
+        <div class="svc-detail-grid">
+          <div>
+            <span class="eyebrow">Clases de tejido</span>
+            <h3 style="margin-top:12px;">Un espacio para crear con las manos</h3>
+            <p>Encuentros pensados para aprender y disfrutar del tejido, ya sea que estés arrancando de cero o quieras perfeccionar tu técnica.</p>
+            <ul>
+              <li>Crochet y tejido a dos agujas</li>
+              <li>Desde principiantes hasta niveles avanzados</li>
+              <li>Grupos reducidos</li>
+              <li>Un espacio para compartir y desconectar</li>
+            </ul>
+          </div>
+          <div class="svc-gallery">
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="10"/><path d="M19 9c-4 4-4 12 0 20M9 19c4-4 12-4 20 0"/><path d="M27 27c4 3 8 9 6 13-3-1-9-3-12-8"/></svg>
+              <figcaption>Crochet y dos agujas</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8v24M18 8l-4 4-4-4"/><path d="M28 8v24M32 8l-4 4-4-4"/></svg>
+              <figcaption>Todos los niveles</figcaption>
+            </figure>
+            <figure>
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="18" r="5"/><circle cx="32" cy="18" r="5"/><path d="M8 38c0-6 4-10 8-10s8 4 8 10M24 38c0-6 4-10 8-10s8 4 8 10"/></svg>
+              <figcaption>Grupos reducidos</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="svc-faq">
+          <h4>Preguntas frecuentes</h4>
+          <details>
+            <summary>¿Necesito experiencia previa?</summary>
+            <p>No, las clases están pensadas para todos los niveles, incluyendo quienes recién empiezan.</p>
+          </details>
+          <details>
+            <summary>¿Tengo que traer materiales?</summary>
+            <p>Te contamos qué necesitás antes de la primera clase, para que vengas con todo listo.</p>
+          </details>
+          <details>
+            <summary>¿Cada cuánto son las clases?</summary>
+            <p>Coordinamos la frecuencia según el grupo, generalmente de forma semanal.</p>
+          </details>
+          <details>
+            <summary>¿Cuánta gente hay por grupo?</summary>
+            <p>Son grupos reducidos para poder acompañar bien a cada una.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="wrap">
+      <div class="intro reveal">
+        <span class="eyebrow">Mapa de reflexología</span>
+        <h2>Un punto en el pie, un beneficio en el cuerpo</h2>
+        <p class="lede">La reflexología parte de la idea de que cada zona del pie se conecta con un órgano o sistema del cuerpo. Arrastrá el pie 3D para girarlo y tocá un punto para descubrir qué trabaja.</p>
+      </div>
+      <div class="map3d-grid reveal">
+        <div class="map3d-viewport" id="map3d-viewport">
+          <canvas id="map3d-canvas"></canvas>
+          <div class="map3d-loading" id="map3d-loading">Cargando modelo 3D…</div>
+          <span class="map3d-hint" id="map3d-hint" hidden>Arrastrá para girar el pie</span>
+        </div>
+        <div class="map3d-panel">
+          <div class="map-info" id="map-info" aria-live="polite">
+            <span class="map-info-eyebrow">Elegí un punto</span>
+            <h3 id="map-info-title">Tocá un punto del pie</h3>
+            <p class="related" id="map-info-related"></p>
+            <p class="tip" id="map-info-tip">Cada zona se conecta con una parte del cuerpo. Girá el modelo y tocá los puntos de colores para descubrir cuál es cuál.</p>
+          </div>
+          <div class="map3d-legend" id="map3d-legend"></div>
+        </div>
+      </div>
+      <p class="map3d-disclaimer">La reflexología es una terapia complementaria de bienestar y no reemplaza el diagnóstico ni el tratamiento médico profesional.</p>
+      <p class="map3d-credit">Modelo 3D "Foot CT scan" por <a href="https://sketchfab.com/woodland.mid" target="_blank" rel="noopener">doorbin</a>, vía <a href="https://sketchfab.com/3d-models/foot-ct-scan-14574809b3684aa8a3f23a9820465e4f" target="_blank" rel="noopener">Sketchfab</a> — licencia CC BY 4.0.</p>
     </div>
   </section>
 
@@ -448,13 +815,13 @@
             <circle cx="97" cy="62" r="26"/><circle cx="97" cy="88" r="26"/>
           </g>
         </svg>
-        <img class="medallion-photo" src="images/karina.jpg" alt="Karina Beatriz Ozper, fundadora de Espacio KB">
+        <img class="medallion-photo" src="images/karina.jpg" alt="Karina Beatriz Ozper, fundadora de Consultorio KB">
         <img class="medallion-inset" src="images/karina-trabajando.jpg" alt="Karina atendiendo a una paciente en el consultorio">
       </div>
       <div class="reveal">
         <span class="eyebrow">Al frente del proyecto</span>
         <h2 style="margin-top:14px;">Karina Beatriz Ozper</h2>
-        <span class="role">Fundadora de Espacio KB</span>
+        <span class="role">Fundadora de Consultorio KB</span>
         <div class="credly">
           <span>Técnica Podóloga · UBA</span>
           <span>Docente universitaria</span>
@@ -477,7 +844,7 @@
           <div class="info">
             <span class="role">Podología · Reflexología</span>
             <h3>Karina Beatriz Ozper</h3>
-            <p class="bio-line">Fundadora de Espacio KB. Técnica Podóloga (UBA) y Reflexóloga (Universidad del Salvador).</p>
+            <p class="bio-line">Fundadora de Consultorio KB. Técnica Podóloga (UBA) y Reflexóloga (Universidad del Salvador).</p>
           </div>
         </div>
         <div class="team-card">
@@ -485,7 +852,7 @@
           <div class="info">
             <span class="role">Masajes</span>
             <h3>Osmar Ocampo</h3>
-            <p class="bio-line">Sesiones de masajes para liberar tensión muscular y recuperar la calma.</p>
+            <p class="bio-line">Masaje descontracturante y deportivo para aliviar contracturas y mejorar el rendimiento muscular. Masaje relajante para bajar las revoluciones y salir liviano.</p>
           </div>
         </div>
         <div class="team-card">
@@ -493,7 +860,7 @@
           <div class="info">
             <span class="role">Masajes</span>
             <h3>Alejandra Ocampo</h3>
-            <p class="bio-line">Sesiones de masajes adaptadas a lo que tu cuerpo necesita en cada visita.</p>
+            <p class="bio-line">Masaje descontracturante: libera tensión muscular y mejora la movilidad. Drenaje linfático: favorece la eliminación de líquidos. Masaje relajante: disminuye el estrés para un bienestar profundo.</p>
           </div>
         </div>
         <div class="team-card">
@@ -501,7 +868,7 @@
           <div class="info">
             <span class="role">Reflexología</span>
             <h3>Alicia Presbisteris</h3>
-            <p class="bio-line">Trabaja los puntos reflejos del pie para restaurar el equilibrio del cuerpo.</p>
+            <p class="bio-line">Estimula los puntos reflejos del pie para mejorar la circulación, bajar el estrés y devolverle el equilibrio a todo el organismo.</p>
           </div>
         </div>
         <div class="team-card">
@@ -509,7 +876,7 @@
           <div class="info">
             <span class="role">Reflexología</span>
             <h3>Marta Zulli</h3>
-            <p class="bio-line">Acompaña cada sesión con calidez y atención personalizada.</p>
+            <p class="bio-line">Sesiones de reflexología pensadas a medida de cada paciente, con foco en aliviar tensiones acumuladas y recuperar energía.</p>
           </div>
         </div>
         <div class="team-card">
@@ -517,7 +884,7 @@
           <div class="info">
             <span class="role">Clases de tejido</span>
             <h3>Beatriz Giménez</h3>
-            <p class="bio-line">Guía las clases de tejido: un espacio para aprender, crear y desconectar en compañía.</p>
+            <p class="bio-line">Enseña crochet y tejido a dos agujas desde cero hasta técnicas avanzadas, en grupos reducidos y a puro disfrute manual.</p>
           </div>
         </div>
       </div>
@@ -550,14 +917,45 @@
     <div class="wrap">
       <div class="card reveal">
         <span class="eyebrow" style="justify-content:center;">Reservá tu turno</span>
-        <h2 style="margin-top:16px;">Escribinos y coordinamos el día y horario a tu medida.</h2>
-        <p class="sub">Contanos qué necesitás — podología, reflexología, masajes o tejido — y te respondemos por WhatsApp.</p>
-        <div class="hero-cta">
-          <a class="btn big" id="contact-cta-wa" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
-            Reservar turno por WhatsApp
-          </a>
-        </div>
+        <h2 style="margin-top:16px;">Contanos qué necesitás y coordinamos el día y horario.</h2>
+        <p class="sub">Completá el formulario y te escribimos por WhatsApp con todo ya armado, listo para confirmar.</p>
+
+        <form id="booking-form" class="booking-form" novalidate>
+          <div class="field">
+            <label for="bk-name">Tu nombre</label>
+            <input type="text" id="bk-name" name="name" placeholder="¿Cómo te llamás?" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="bk-service">Servicio</label>
+            <select id="bk-service" name="service" required>
+              <option value="" disabled selected>Elegí un servicio</option>
+              <option value="Podología">Podología</option>
+              <option value="Reflexología">Reflexología</option>
+              <option value="Masajes">Masajes</option>
+              <option value="Clases de tejido">Clases de tejido</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bk-date">Fecha preferida</label>
+            <input type="date" id="bk-date" name="date">
+          </div>
+          <div class="field">
+            <label for="bk-time">Horario preferido</label>
+            <select id="bk-time" name="time">
+              <option value="" disabled selected>Elegí un horario</option>
+              <option>Mañana (9 a 13 hs)</option>
+              <option>Tarde (14 a 18 hs)</option>
+              <option>Noche (18 a 20 hs)</option>
+            </select>
+          </div>
+          <div class="submit-row">
+            <button type="submit" class="btn big" id="booking-submit">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l-.2.3.6 2.4-2.5-.7-.3.2A8.2 8.2 0 1 1 12 3.8Zm-3.3 4.1c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.1 1.8 2.9 4.5 4 2.2 1 2.7.8 3.1.7.5 0 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.8-1-2.4-.2-.6-.5-.5-.7-.5Z"/></svg>
+              Reservar por WhatsApp
+            </button>
+          </div>
+        </form>
+        <p class="booking-note">Es un pedido de turno, no una confirmación automática — te respondemos por WhatsApp para cerrar el día y horario.</p>
       </div>
     </div>
   </section>
@@ -571,20 +969,81 @@
         <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
         <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="600" font-size="30" fill="var(--ink)">KB</text>
       </svg>
-      <span>Espacio KB</span>
+      <span>Consultorio KB</span>
     </a>
-    <p class="fine">© <span id="year"></span> Espacio KB — Karina Beatriz Ozper. Podología · Reflexología · Masajes · Tejido.</p>
+    <p class="fine">© <span id="year"></span> Consultorio KB — Karina Beatriz Ozper. Podología · Reflexología · Masajes · Tejido.</p>
   </div>
 </footer>
 
 <script>
   (function(){
     var phone = "5491162543934";
-    var msg = encodeURIComponent("¡Hola! Quiero reservar un turno en Espacio KB 🦶");
+    var msg = encodeURIComponent("¡Hola! Quiero reservar un turno en Consultorio KB 🦶");
     var link = "https://wa.me/" + phone + "?text=" + msg;
-    ["nav-cta","hero-cta-wa","contact-cta-wa","mobile-cta-wa"].forEach(function(id){
+    ["nav-cta","hero-cta-wa","mobile-cta-wa"].forEach(function(id){
       var el = document.getElementById(id);
       if(el) el.href = link;
+    });
+
+    var bookingForm = document.getElementById("booking-form");
+    if(bookingForm){
+      bookingForm.addEventListener("submit", function(e){
+        e.preventDefault();
+        var service = document.getElementById("bk-service").value;
+        if(!service){ document.getElementById("bk-service").focus(); return; }
+
+        var name = document.getElementById("bk-name").value.trim();
+        var dateVal = document.getElementById("bk-date").value;
+        var time = document.getElementById("bk-time").value;
+
+        var lines = ["¡Hola! Quiero reservar un turno en Consultorio KB 🦶"];
+        lines.push("Servicio: " + service);
+        if(name) lines.push("Nombre: " + name);
+        if(dateVal){
+          var d = new Date(dateVal + "T00:00:00");
+          lines.push("Fecha preferida: " + d.toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }));
+        }
+        if(time) lines.push("Horario preferido: " + time);
+
+        var bookingMsg = encodeURIComponent(lines.join("\n"));
+        window.open("https://wa.me/" + phone + "?text=" + bookingMsg, "_blank", "noopener");
+      });
+    }
+
+    document.querySelectorAll(".svc-more").forEach(function(svcToggle){
+      var svcDetail = document.getElementById(svcToggle.getAttribute("aria-controls"));
+      if(!svcDetail) return;
+      svcToggle.addEventListener("click", function(){
+        var open = svcDetail.hasAttribute("hidden");
+        if(open){
+          svcDetail.removeAttribute("hidden");
+          svcDetail.classList.add("in");
+        } else {
+          svcDetail.setAttribute("hidden","");
+        }
+        svcToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        svcToggle.querySelector(".svc-more-label").textContent = open ? "Ver menos" : "Conocé más";
+        if(open){ svcDetail.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+      });
+    });
+
+    var zones = document.querySelectorAll(".rz");
+    var mapTitle = document.getElementById("map-info-title");
+    var mapText = document.getElementById("map-info-text");
+    function showZone(zone){
+      zones.forEach(function(z){ z.classList.remove("active"); });
+      zone.classList.add("active");
+      mapTitle.textContent = zone.dataset.name;
+      mapText.textContent = zone.dataset.benefit;
+    }
+    zones.forEach(function(zone){
+      zone.addEventListener("pointerenter", function(e){
+        if(e.pointerType === "mouse") showZone(zone);
+      });
+      zone.addEventListener("click", function(){ showZone(zone); });
+      zone.addEventListener("keydown", function(e){
+        if(e.key === "Enter" || e.key === " "){ e.preventDefault(); showZone(zone); }
+      });
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -608,6 +1067,176 @@
       document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
     }
   })();
+</script>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+  const ZONES = [
+    { point:[-0.208, 0.526, -0.389], color:0x8fc1ff, name:"Cabeza y senos paranasales", related:"Cabeza, senos paranasales", tip:"Presioná suave con el pulgar, en círculos, durante 30 segundos." },
+    { point:[0.000, 0.405, -0.323], color:0xb39ddb, name:"Hipófisis y cerebro", related:"Hipófisis y cerebro", tip:"Aplicá una presión firme y sostenida durante unos segundos." },
+    { point:[0.077, 0.266, -0.172], color:0x80cbc4, name:"Ojos y oídos", related:"Ojos y oídos", tip:"Masajeá con movimientos pequeños en la base de los dedos." },
+    { point:[0.203, 0.195, -0.080], color:0x90caf9, name:"Pulmones y pecho", related:"Pulmones y pecho", tip:"Deslizá el pulgar de lado a lado con presión media." },
+    { point:[0.232, -0.051, 0.655], color:0xef9a9a, name:"Corazón", related:"Corazón", tip:"Presioná suavemente y soltá, repitiendo varias veces." },
+    { point:[-0.117, -0.105, 0.298], color:0xffcc80, name:"Hígado y vesícula", related:"Hígado y vesícula biliar", tip:"Aplicá presión constante durante 20 a 30 segundos." },
+    { point:[0.064, -0.103, 0.603], color:0xa5d6a7, name:"Estómago y bazo", related:"Estómago y bazo", tip:"Masajeá en pequeños círculos hacia el centro del pie." },
+    { point:[0.065, -0.331, 0.568], color:0xce93d8, name:"Riñones y suprarrenales", related:"Riñones y glándulas suprarrenales", tip:"Presioná con el nudillo, de forma suave y progresiva." },
+    { point:[-0.158, 0.008, 0.074], color:0xfff59d, name:"Intestinos", related:"Intestinos", tip:"Deslizá el pulgar en el sentido de las agujas del reloj." },
+    { point:[-0.128, -0.519, 0.271], color:0x80deea, name:"Columna vertebral", related:"Columna vertebral", tip:"Recorré el borde interno del pie con presión suave, de arriba a abajo." },
+    { point:[0.091, -0.708, 0.528], color:0xf48fb1, name:"Nervio ciático y zona lumbar", related:"Nervio ciático y zona lumbar", tip:"Presioná el talón con el pulgar y sostené unos segundos." }
+  ];
+
+  const viewport = document.getElementById('map3d-viewport');
+  const canvas = document.getElementById('map3d-canvas');
+  const loadingEl = document.getElementById('map3d-loading');
+  const hintEl = document.getElementById('map3d-hint');
+  const legendEl = document.getElementById('map3d-legend');
+  const titleEl = document.getElementById('map-info-title');
+  const relatedEl = document.getElementById('map-info-related');
+  const tipEl = document.getElementById('map-info-tip');
+
+  legendEl.innerHTML = ZONES.map(function(z, i){
+    return '<button type="button" class="map3d-legend-item" data-i="'+i+'">' +
+      '<span class="map3d-swatch" style="background:#'+z.color.toString(16).padStart(6,'0')+'"></span>' + z.name +
+      '</button>';
+  }).join('');
+  var legendButtons = Array.prototype.slice.call(legendEl.querySelectorAll('.map3d-legend-item'));
+
+  function selectZone(i){
+    var z = ZONES[i];
+    titleEl.textContent = z.name;
+    relatedEl.textContent = "Se relaciona con: " + z.related;
+    tipEl.textContent = z.tip;
+    legendButtons.forEach(function(b, bi){ b.classList.toggle('active', bi === i); });
+    markers.forEach(function(m, mi){ m.scale.setScalar(mi === i ? 1.7 : 1); });
+  }
+  legendButtons.forEach(function(b, i){ b.addEventListener('click', function(){ selectZone(i); }); });
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 100);
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.3);
+  keyLight.position.set(2, 3, 2);
+  scene.add(keyLight);
+  const fillLight = new THREE.DirectionalLight(0x93c2ff, 0.35);
+  fillLight.position.set(-2, -1, -2);
+  scene.add(fillLight);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.enablePan = false;
+  controls.enableZoom = false;
+
+  function resize(){
+    var w = viewport.clientWidth, h = viewport.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var markers = [];
+  var modelGroup = new THREE.Group();
+  scene.add(modelGroup);
+
+  const loader = new GLTFLoader();
+  loader.load('assets/pie.glb', function(gltf){
+    var model = gltf.scene;
+    modelGroup.add(model);
+
+    var box = new THREE.Box3().setFromObject(model);
+    var center = box.getCenter(new THREE.Vector3());
+    model.position.sub(center);
+
+    var size = box.getSize(new THREE.Vector3());
+    var maxDim = Math.max(size.x, size.y, size.z);
+    model.scale.setScalar(2 / maxDim);
+
+    var box2 = new THREE.Box3().setFromObject(model);
+    var sphere = box2.getBoundingSphere(new THREE.Sphere());
+
+    camera.position.set(0, sphere.radius * 0.25, sphere.radius * 2.5);
+    controls.target.set(0, 0, 0);
+    controls.minDistance = sphere.radius * 1.1;
+    controls.maxDistance = sphere.radius * 4.5;
+    controls.update();
+
+    var markerGeo = new THREE.SphereGeometry(0.035, 16, 16);
+    ZONES.forEach(function(z){
+      var mat = new THREE.MeshBasicMaterial({ color: z.color, depthTest: true });
+      var marker = new THREE.Mesh(markerGeo, mat);
+      marker.position.set(z.point[0], z.point[1], z.point[2]);
+      modelGroup.add(marker);
+      markers.push(marker);
+    });
+
+    loadingEl.hidden = true;
+    hintEl.hidden = false;
+  }, undefined, function(err){
+    loadingEl.textContent = 'No se pudo cargar el modelo 3D.';
+    console.error('GLB load error', err);
+  });
+
+  var raycaster = new THREE.Raycaster();
+  var pointer = new THREE.Vector2();
+  var hovered = null;
+
+  function pointerToNDC(clientX, clientY){
+    var rect = canvas.getBoundingClientRect();
+    pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  }
+
+  function pickMarker(clientX, clientY){
+    if(!markers.length) return -1;
+    pointerToNDC(clientX, clientY);
+    raycaster.setFromCamera(pointer, camera);
+    var hits = raycaster.intersectObjects(markers, false);
+    if(!hits.length) return -1;
+    return markers.indexOf(hits[0].object);
+  }
+
+  var dragStart = null;
+  canvas.addEventListener('pointerdown', function(e){ dragStart = { x:e.clientX, y:e.clientY }; viewport.classList.add('dragging'); });
+  window.addEventListener('pointerup', function(){ viewport.classList.remove('dragging'); });
+
+  canvas.addEventListener('pointermove', function(e){
+    var idx = pickMarker(e.clientX, e.clientY);
+    if(idx !== hovered){
+      if(hovered !== null && markers[hovered]) markers[hovered].scale.setScalar(1);
+      hovered = idx >= 0 ? idx : null;
+      if(hovered !== null) markers[hovered].scale.setScalar(1.4);
+      canvas.style.cursor = hovered !== null ? 'pointer' : 'grab';
+    }
+  });
+
+  canvas.addEventListener('click', function(e){
+    if(dragStart && (Math.abs(e.clientX-dragStart.x) > 4 || Math.abs(e.clientY-dragStart.y) > 4)) return;
+    var idx = pickMarker(e.clientX, e.clientY);
+    if(idx >= 0) selectZone(idx);
+  });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
 </script>
 </body>
 </html>
